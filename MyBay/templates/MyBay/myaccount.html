@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Profile</title>
+{% endblock %}
+
+{% block content %}
+ 
+	<h2> Profile </h2>
+	<div class="container">
+	    <form class="form" method="post">
+	        {% csrf_token %}
+			<b>{{ erro }}</b>
+	        {{ form.as_p }}
+	        <button type="submit">Submit</button>
+	    </form>
+	    <br>
+	    <a href="{%url 'deleteaccount' %}"> Delete Account</a>
+	</div> 
+
+{% endblock %}

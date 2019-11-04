@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    	<meta charset="utf-8">
+    
+    	<title>{% block title %}MYBAY{% endblock %}</title>
+  
+    	{% load static %}
+		<link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+  
+  </head>
+  
+  
+  <body>
+    <header> 
+      <br>
+      <div style="font-size:500%;">
+      <img src="{% static 'images/logo.svg' %}" width="75" height="75" alt="Mer">
+      <b><font color="red">My</font><font color="blue">B</font><font color="yellow">a</font><font color="green">y</font></b>
+      </div>
+      <br>
+      
+      {% if user.is_authenticated %} 
+        <button class="head" onclick="window.location.href='/myacccount'">My Account</button>
+        <button class="head" onclick="window.location.href='/myproducts'">My Products</button>
+        <button class="head" onclick="window.location.href='/searchproducts'">Search</button>
+        <button class="head" onclick="window.location.href='/accounts/logout'">Logout</button>
+      {% else %}
+        <button class="head" onclick="window.location.href='/accounts/login'">Login</button>
+        <button class="head" onclick="window.location.href='/register'">Sign Up</button>
+      {% endif %}
+      
+    </header>
+    <br>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    
+    <footer align="right"> 
+    <hr>
+    <p>Ismael Jesus & Tomás Matias</p>
+    <p> Mestrado em Engenharia de Informação Geoespacial</p>
+    <p>2019/2020</p>
+    </footer>
+  </body>
+</html>

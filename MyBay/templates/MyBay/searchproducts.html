@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Profile</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="form">
+	<form method="POST" enctype="multipart/form-data" action="/searchproducts/">
+	<center>
+	    {% csrf_token %}
+	     
+	     <p>
+	     Name: <input type="text" name="name"> 
+	     &ensp; My Country:  <input type="radio" name="countrypr" value="yes">  
+	     &ensp; Category:
+		     <select name="category" >
+			 	<option id="0" value="">---</option> 
+			 	<option id="1" value="clothes">Clothes</option> 
+			  	<option id="2" value="comics">Comics</option> 
+			  	<option id="3" value="figures">Figures</option> 
+			  	<option id="4" value="games">Games</option> 
+			  	<option id="5" value="others">Others</option> 
+			</select>	     
+		</p>
+
+	     <p>
+	     Min Price: <input type="number" name="minprice" min=0 step=0.01>
+	     &ensp; Max Price: <input type="number" name="maxprice" min=0 step=0.01> 
+	     &ensp; After date: <input type="date" name="afterdate"> 
+
+	    </p>
+	    
+	     <br> 
+	    <div clas="dive">
+		     Order by: <select name="variavel" >
+			 	<option id="1" value="created_date">Created Date</option> 
+			  	<option id="2" value="price">Price</option> 
+			  	<option id="3" value="title">Name</option> 
+			</select>
+			
+		     <select name="order" >
+			 	<option id="1" value="asc">Ascending</option> 
+			  	<option id="2" value="desc">Descending</option> 
+			</select>
+		</div>
+	<br>
+	 	<input type="submit" value="Filtrar"> </input>
+	</center> 
+	</form> 
+</div>
+	 
+	 <br>   
+	 <br> 
+	 
+	{% if productList %}
+		<table class="a">
+			<th> Image </th>
+			<th> Title </th>
+			<th> Price </th>
+			<th> Created Date </th> 
+			
+			{%for p in productList%}
+				<tr>
+					<td class="b"> <img src="{{p.product_image.url}}" width=100> </td>
+					<td class="b"> {{p.title}} </td>
+					<td class="b"> {{p.price}} € </td>
+					<td class="b"> {{p.created_date}} </td>
+					<td class="b"> <p><a href="{%url 'viewproduct' p.id %}"> View </a></p>
+				</tr>
+			{%endfor%} 
+			
+		</table> 
+	{% else %}
+		<center> No products! </center> 
+	{% endif %}
+	
+{% endblock %}
